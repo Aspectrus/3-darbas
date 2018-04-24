@@ -78,13 +78,13 @@ out.close();
         else b.push_back(i);
    }
 
-
+//    temp.sorting(a);
+//    temp.sorting(b);
  cout<<z.size()<<" - ";
    z.clear();
    a.clear();
    b.clear();
-//sorting(a);
-//sorting(b);
+
 
 }
 
@@ -92,92 +92,60 @@ out.close();
 template<typename Container>
  void budas2read(std::string name)
 {
-    int g=0;
+  int g=0;
     Container z, a;
     std::ifstream in (name);
     std::string eil;
-      mokinys temp;
+    mokinys temp;
+
     while(std::getline(in, eil))
     {
         std::istringstream ss(eil);
-        std::string a;
-        ss>>a;
-       temp.vardas=a;
-        ss>>a;
+        ss>>temp.vardas;
+        ss>>temp.pavarde;
         int num;
         while(ss>>num)
         temp.pazymiai.push_back(num);
-        temp.egzaminas=temp.pazymiai[temp.pazymiai.size()-1];
+      int egzaminas=temp.pazymiai[temp.pazymiai.size()-1];
         temp.pazymiai.pop_back();
-                        temp.galmed=vidurkis(temp.pazymiai);
+        temp.galmed=0.6*egzaminas+mediana(temp.pazymiai)*0.4;
+        temp.galvid=0.6*egzaminas+vidurkis(temp.pazymiai)*0.4;
         z.push_back(mokinys(temp));
                 temp.pazymiai.clear();
 
     }
     in.close();
-                        std::partition(z.begin(), z.end(), [](const mokinys& g)
+
+                       auto it = std::partition(z.begin(), z.end(), [](const mokinys& g)
                        {
                         float galBalas=vidurkis(g.pazymiai);
+                             // float galBalas=g.galmed;
                          return(galBalas>=6);
                        });
-                        auto it=std::partition_point(z.begin(), z.end(), [](const mokinys& g)
-                       {
-                        float galBalas=vidurkis(g.pazymiai);
-                         return(galBalas>=6);
-                       });
-auto e=z.end();
-e--;
-for(e; e!=it; e--)
+
+
+    auto e=z.end();
+ e--;
+for(e; e!=it;)
 {
     a.push_back(*e);
+    e--;
     z.pop_back();
 
 }
+
 a.push_back(*it);
 z.pop_back();
-     /*  for(auto i=z.begin(); i!=z.end();)
-   {
-        galBalas=vidurkis((*i).pazymiai);
-        if(galBalas>=6){ a.push_back(mokinys(*i)); z.erase(i);     }
-        else i++;
-   }
-*/
+//    temp.sorting(z);
+//    temp.sorting(a);
  cout<<z.size()+a.size()<<" - ";
    z.clear();
    a.clear();
 
-//sorting(z);
-//sorting(a);
 
 }
 
-template<typename Container>
- void budas1 (std::string name)
- {
-                cout<<name<<'\n';
-          for(int i=1; i<=n; i++)
-               {
-                s();
-                checkfile(std::to_string(i)+"irasas.txt");
-                budas1read<Container>(std::to_string(i)+"irasas.txt");
-                e();
-             }
 
- }
-
-template<typename Container>
- void budas2(std::string name)
- {
-                cout<<name<<'\n';
-          for(int i=1; i<=n; i++)
-               {
-                s();
-                checkfile(std::to_string(i)+"irasas.txt");
-                budas2read<Container>(std::to_string(i)+"irasas.txt");
-               e();
-             }
-
- }
  template<typename Container>
 void budas3read(Container& varg, Container& kiet, std::string name)
 {
@@ -204,8 +172,35 @@ void budas3read(Container& varg, Container& kiet, std::string name)
     }
         in.close();
 
-//sorting(varg);
-//sorting(kiet);
+//temp.sorting(varg);
+//temp.sorting(kiet);
+
+}
+template<typename Container>
+void budas1 (std::string name)
+{
+    cout<<name<<'\n';
+    for(int i=1; i<=n; i++)
+    {
+        s();
+        checkfile(std::to_string(i)+"irasas.txt");
+        budas1read<Container>(std::to_string(i)+"irasas.txt");
+        e();
+    }
+
+}
+
+template<typename Container>
+void budas2(std::string name)
+{
+    cout<<name<<'\n';
+    for(int i=1; i<=n; i++)
+    {
+        s();
+        checkfile(std::to_string(i)+"irasas.txt");
+        budas2read<Container>(std::to_string(i)+"irasas.txt");
+        e();
+    }
 
 }
 template <typename Container>
