@@ -38,10 +38,5 @@ TEST_F(ClassDeclaration, isnumber)
     bool c=isnumber("5");
     EXPECT_EQ(c, true);
 }
-TEST_F(ClassDeclaration, Test3)
-{
 
-
-
-}
 
