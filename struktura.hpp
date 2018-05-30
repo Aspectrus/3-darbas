@@ -7,6 +7,7 @@ using std::cin;
 
 
 
+
 template <typename T> void spausdintifaila(const T kiet, const T varg, int i)
 {
 
@@ -62,8 +63,8 @@ out.close();
         while(ss>>num) temp.pazymiai.push_back(num);
         int egzaminas=temp.pazymiai[temp.pazymiai.size()-1];
         temp.pazymiai.pop_back();
-        temp.galmed=0.6*egzaminas+mediana(temp.pazymiai)*0.4;
-        temp.galvid=0.6*egzaminas+vidurkis(temp.pazymiai)*0.4;
+        temp.galmed=0.6*egzaminas+temp.mediana(temp.pazymiai)*0.4;
+        temp.galvid=0.6*egzaminas+temp.vidurkis(temp.pazymiai)*0.4;
         z.push_back(mokinys(temp));
         temp.pazymiai.clear();
 
@@ -73,7 +74,7 @@ out.close();
      int g=0;
     for(auto i:z)
    {
-        galBalas=vidurkis(i.pazymiai);
+        galBalas=temp.vidurkis(i.pazymiai);
         if(galBalas>=6) a.push_back(i);
         else b.push_back(i);
    }
@@ -81,9 +82,9 @@ out.close();
 //    temp.sorting(a);
 //    temp.sorting(b);
  cout<<z.size()<<" - ";
-   z.clear();
-   a.clear();
-   b.clear();
+  z.clear();
+  a.clear();
+  b.clear();
 
 
 }
@@ -108,8 +109,8 @@ template<typename Container>
         temp.pazymiai.push_back(num);
       int egzaminas=temp.pazymiai[temp.pazymiai.size()-1];
         temp.pazymiai.pop_back();
-        temp.galmed=0.6*egzaminas+mediana(temp.pazymiai)*0.4;
-        temp.galvid=0.6*egzaminas+vidurkis(temp.pazymiai)*0.4;
+        temp.galmed=0.6*egzaminas+temp.mediana(temp.pazymiai)*0.4;
+        temp.galvid=0.6*egzaminas+temp.vidurkis(temp.pazymiai)*0.4;
         z.push_back(mokinys(temp));
                 temp.pazymiai.clear();
 
@@ -118,8 +119,10 @@ template<typename Container>
 
                        auto it = std::partition(z.begin(), z.end(), [](const mokinys& g)
                        {
-                        float galBalas=vidurkis(g.pazymiai);
-                             // float galBalas=g.galmed;
+
+
+
+                           float galBalas=g.vidurkis(g.pazymiai);
                          return(galBalas>=6);
                        });
 
@@ -163,9 +166,9 @@ void budas3read(Container& varg, Container& kiet, std::string name)
             vtemp.push_back(num);
     int egzaminas=vtemp[vtemp.size()-1];
     vtemp.pop_back();
-    temp.galmed=0.6*egzaminas+mediana(vtemp)*0.4;
-    temp.galvid=0.6*egzaminas+vidurkis(vtemp)*0.4;
-       if(vidurkis(vtemp)>=6)
+    temp.galmed=0.6*egzaminas+temp.mediana(vtemp)*0.4;
+    temp.galvid=0.6*egzaminas+temp.vidurkis(vtemp)*0.4;
+       if(temp.vidurkis(vtemp)>=6)
             kiet.push_back(mokinys(temp));
         else
             varg.push_back(mokinys(temp));
@@ -176,6 +179,9 @@ void budas3read(Container& varg, Container& kiet, std::string name)
 //temp.sorting(kiet);
 
 }
+
+
+
 template<typename Container>
 void budas1 (std::string name)
 {

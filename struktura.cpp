@@ -8,7 +8,12 @@ using std::cout;
 using std::cin;
 using std::endl;
 std::chrono::time_point<std::chrono::high_resolution_clock> start,end;
-float mediana (std::vector<int> pazymiai)
+/**
+ *
+ * @param pazymiai
+ * @return
+ */
+float mokinys::mediana (std::vector<int> pazymiai)
 {
     std::sort (pazymiai.begin(), pazymiai.end());
 
@@ -16,20 +21,36 @@ float mediana (std::vector<int> pazymiai)
         return (pazymiai[pazymiai.size()/2]+pazymiai[pazymiai.size()/2-1])/float(2);
     else
         return pazymiai[pazymiai.size()/2];
+
 }
-float vidurkis(std::vector<int> pazymiai){
-float sum=0;
+/**
+ *
+ * @param pazymiai
+ * @return
+ */
+float mokinys::vidurkis (std::vector<int> pazymiai){
+    float sum=0;
     for( std::size_t i=0; i<pazymiai.size(); i++ )
     {
         sum+=pazymiai[i];
     }
     return sum/pazymiai.size();
 
+}
+const float mokinys::vidurkis ( std::vector<int> pazymiai)const {
+    float sum=0;
+    for( std::size_t i=0; i<pazymiai.size(); i++ )
+    {
+        sum+=pazymiai[i];
+    }
+    return sum/pazymiai.size();
 
 }
 
+
 unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 std::default_random_engine generator (seed);
+
 int randomnumber (int a, int b)
 {
     std::uniform_int_distribution<int> distribution(a, b);
@@ -113,6 +134,7 @@ void mokinys::sorting(std::vector<mokinys> & deqduom)
             });
 
 }
+
 
 void s()
 {
